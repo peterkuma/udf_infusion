@@ -1569,6 +1569,10 @@ inline static void doublePush(struct DoubleBuffer *buffer, unsigned int step, do
 	if (data->size == data->used) {			\
 		data->size<<= 1;					\
 		data->number = (double *) realloc(data->number, data->size * sizeof(*(data->number))); \
+		if (NULL == data->number) {			\
+			*error = 1;						\
+			return;							\
+		}									\
 	}
 
 #define LESSINIT()							\
